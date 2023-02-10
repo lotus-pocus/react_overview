@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './components/Header';
+
+import Landing from './pages/Landing';
+import Contact from './pages/Contact';
+import Search from './pages/Search';
+
+
+import {Routes, Route} from 'react-router-dom';
+
 
 function App() {
+  const [brand, setBrand] = useState('React Overview!');
+  const [results, setResults] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header brand={brand} />
+
+
+      <Routes>
+        <Route path="/" element={<Landing />}/>
+        <Route path="/contact" element={<Contact setBrand={setBrand} />} />
+        <Route path="/search" element={<Search results={results} setResults={setResults}/>}  />
+      </Routes>
+
+      
     </div>
   );
 }
